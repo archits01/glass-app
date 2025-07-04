@@ -7,7 +7,7 @@ class Config {
     constructor() {
         this.env = process.env.NODE_ENV || 'development';
         this.defaults = {
-            apiUrl: process.env.pickleglass_API_URL || 'http://localhost:9001',
+            apiUrl: 'https://glass-production.up.railway.app',
             apiTimeout: 10000,
             
             webUrl: process.env.pickleglass_WEB_URL || 'http://localhost:3000',
