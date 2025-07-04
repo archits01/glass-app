@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const Database = require('better-sqlite3');
 
@@ -12,6 +13,13 @@ const getDatabasePath = () => {
 };
 
 const dbPath = getDatabasePath();
+
+// Ensure the directory exists
+const dir = path.dirname(dbPath);
+if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+}
+
 const db = new Database(dbPath);
 
 db.pragma('journal_mode = WAL');
