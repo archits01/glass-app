@@ -1,0 +1,36 @@
+# electron-builder.yml
+
+# The unique application ID
+appId: com.pickle.glass
+
+# The user-facing application name
+productName: Glass
+
+# Publish configuration for GitHub releases
+publish:
+  provider: github
+  owner: pickle-com
+  repo: glass
+  releaseType: draft
+
+# List of files to be included in the app package
+files:
+  - src/**/*
+  - package.json
+  - pickleglass_web/backend_node/**/*
+  - '!**/node_modules/electron/**'
+  - public/build/**/*
+
+# Additional resources to be copied into the app's resources directory
+extraResources:
+  - from: src/assets/SystemAudioDump
+    to: SystemAudioDump
+  - from: pickleglass_web/out
+    to: out
+
+# macOS specific configuration
+mac:
+  # The application category type
+  category: public.app-category.utilities
+  # Path to the .icns icon file
+  icon: src/assets/logo.icns 
