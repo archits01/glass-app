@@ -1,8 +1,17 @@
 const path = require('path');
-const databaseInitializer = require('../../src/common/services/databaseInitializer');
 const Database = require('better-sqlite3');
 
-const dbPath = databaseInitializer.getDatabasePath();
+// For web deployment, use a simple database path
+const getDatabasePath = () => {
+    if (process.env.NODE_ENV === 'production') {
+        // In production, use Railway's persistent storage
+        return process.env.DATABASE_URL || '/tmp/pickleglass.db';
+    }
+    // In development, use local path
+    return path.join(__dirname, '../../data/pickleglass.db');
+};
+
+const dbPath = getDatabasePath();
 const db = new Database(dbPath);
 
 db.pragma('journal_mode = WAL');
